@@ -22,6 +22,10 @@ export default {
           responsable: responsable,
           todo: todo
         })        
+      },
+      // delete task
+      deleteTask(index) {
+            this.tasks.splice(index, 1)
       }
     }
 }
@@ -66,7 +70,9 @@ export default {
                 <td>{{task.todo}}</td>
           <td>boutton Faite !</td>
           <td>boutton Modifier</td>
-          <td>boutton Supprimer</td>
+          <td>
+            <button class="delete" @click="deleteTask(index)">Supprimer</button>
+          </td>
         </tr>
       </tbody>
     </table>
