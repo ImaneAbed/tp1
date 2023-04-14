@@ -18,6 +18,30 @@ export default {
   <div class="title">
     <h1>Voici la todo list </h1>
   </div>
+  <div class="add">
+    <div class="time">
+      <label for="tentacles">Durée de la tâche (0-10 heures) : </label>
+      <input type="number" id="tentacles" name="tentacles" min="0" max="10">
+    </div>
+    <div class="responsable">
+      <label for="responsable-select">Choix du responsable : </label>
+      <select name="respopnsable" id="responsable-select">
+        <option value="">--Responsable--</option>
+        <option value="alice">Alice</option>
+        <option value="bob">Bob</option>
+        <option value="oscar">Oscar</option>
+      </select>
+    </div>
+    <div class="todo">
+      <label for="name">Nom de la tâche (4 à 12 caractères): </label>
+      <input type="text" id="name" name="name" required minlength="4" maxlength="12" size="10">
+    </div>
+    <div class="button">
+      <button class="add-button" type="button">
+        Ajouter la tâche
+      </button>
+    </div>
+  </div>
   <div class = "table">
     <table border>
       <thead>
@@ -32,38 +56,17 @@ export default {
       </thead>
       <tbody>
         <tr>
-          <td>The table body</td>
-          <td>with two columns</td>
-          <td>The table body</td>
-          <td>The table body</td>
-          <td>The table body</td>
-          <td>The table body</td>
+          <td>Tâche dynamique</td>
+          <td>Responsable dynamique</td>
+          <td>Durée dynamique</td>
+          <td>boutton Faite !</td>
+          <td>boutton Modifier</td>
+          <td>boutton Supprimer</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="time">
-    <label for="tentacles">Durée de la tâche (0-10 heures) : </label>
-    <input type="number" id="tentacles" name="tentacles" min="0" max="10">
-  </div>
-  <div class="responsable">
-    <label for="responsable-select">Choix du responsable : </label>
-    <select name="respopnsable" id="responsable-select">
-      <option value="">--Responsable--</option>
-      <option value="alice">Alice</option>
-      <option value="bob">Bob</option>
-      <option value="oscar">Oscar</option>
-    </select>
-  </div>
-  <div class="todo">
-    <label for="name">Nom de la tâche (4 à 12 caractères): </label>
-    <input type="text" id="name" name="name" required minlength="4" maxlength="12" size="10">
-  </div>
-  <div class="button">
-    <button class="add-button" type="button">
-      Ajouter la tâche
-    </button>
-  </div>
+  
   <div>
     <button @click="increment">ce boutton a ete appyé {{ count }} fois</button>
   </div>
