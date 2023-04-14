@@ -19,16 +19,25 @@ export default {
     <h1>Voici la todo list </h1>
   </div>
   <div class = "table">
-    <table>
+    <table border>
       <thead>
         <tr>
-          <th colspan="2">The table header</th>
+          <th>Tâche</th>
+          <th>Responsable</th>
+          <th>Durée</th>
+          <th>Faite !</th>
+          <th>Modifier</th>
+          <th>Supprimer</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>The table body</td>
           <td>with two columns</td>
+          <td>The table body</td>
+          <td>The table body</td>
+          <td>The table body</td>
+          <td>The table body</td>
         </tr>
       </tbody>
     </table>
