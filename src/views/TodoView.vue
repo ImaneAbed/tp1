@@ -20,6 +20,20 @@ export default {
         if(time.length===0 || responsable.length===0 || todo.length===0){
           return;
         }
+        let a=0;
+        let a_time=0;
+        let b=0;
+        let b_time=0;
+        let o=0;
+        let o_time=0;
+        for(i in this.tasks){
+          if(i.responsable==='Alice'){a++;a_time=i.time}
+          if(i.responsable==='Bob'){b++;b_time=i.time}
+          if(i.responsable==='Oscar'){o++;o_time=i.time}
+        }
+        if(responsable==='Alice' && (a>=3 ||a_time>=10)){return;}
+        if(responsable==='Bob' && (b>=3 ||b_time>=10)){return;}
+        if(responsable==='Oscar' && (o>=3 ||o_time>=10)){return;}
         this.tasks.push({
           time: time,
           responsable: responsable,
