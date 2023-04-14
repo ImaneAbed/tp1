@@ -16,11 +16,11 @@ export default {
     },
     methods: {
       // Add Task
-      SubmitTask(time1, responsable1, todo1) {
+      SubmitTask(time, responsable, todo) {
         this.tasks.push({
-          time: time1,
-          responsable: responsable1,
-          todo: todo1
+          time: time,
+          responsable: responsable,
+          todo: todo
         })        
       }
     }
@@ -32,8 +32,8 @@ export default {
     <h1>Voici la todo list </h1>
   </div>
   <div class="add">
-      <label for="tentacles">Durée de la tâche (0-10 heures) : </label>
-      <input type="number" id="tentacles" name="tentacles" min="0" max="10" v-model="tentaclesValue">
+      <label for="time">Durée de la tâche (0-10 heures) : </label>
+      <input type="number" id="time" name="time" min="0" max="10" v-model="timeValue">
       <label for="responsable-select">Choix du responsable : </label>
       <select name="respopnsable" id="responsable-select" v-model="responsableValue">
         <option value="">--Responsable--</option>
@@ -43,7 +43,7 @@ export default {
       </select>
       <label for="name">Nom de la tâche (4 à 12 caractères): </label>
       <input type="text" id="name" name="name" required minlength="4" maxlength="12" size="10" placeholder="Tâche..."  v-model="nameValue">
-      <button class="add-button" @click="SubmitTask(tentaclesValue,responsableValue,nameValue)">
+      <button class="add-button" @click="SubmitTask(timeValue,responsableValue,nameValue)">
         Ajouter la tâche
       </button>
   </div>
