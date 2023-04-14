@@ -1,13 +1,39 @@
-<script setup>
-  let msg = "À faire : ";
+<script>
+export default {
+  data() {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    increment() {
+      // update component state
+      this.count++
+    }
+  }
+}
 </script>
 
 <template>
   <div class="title">
     <h1>Voici la todo list </h1>
-    <span>{{ msg }}</span>
   </div>
-  <div class="durée">
+  <div class = "table">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">The table header</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>The table body</td>
+          <td>with two columns</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="time">
     <label for="tentacles">Durée de la tâche (0-10 heures) : </label>
     <input type="number" id="tentacles" name="tentacles" min="0" max="10">
   </div>
@@ -21,13 +47,16 @@
     </select>
   </div>
   <div class="todo">
-    <label for="name">Nom de la tâche : </label>
+    <label for="name">Nom de la tâche (4 à 12 caractères): </label>
     <input type="text" id="name" name="name" required minlength="4" maxlength="12" size="10">
   </div>
-  <div class="apply">
-    <button class="favorite styled" type="button">
+  <div class="button">
+    <button class="add-button" type="button">
       Ajouter la tâche
     </button>
+  </div>
+  <div>
+    <button @click="increment">ce boutton a ete appyé {{ count }} fois</button>
   </div>
 </template>
 
