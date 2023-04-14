@@ -1,16 +1,29 @@
 <script>
 export default {
-  data() {
-    return {
-      count: 0
+    name: "TodoApp",
+    props: {
+        msg: String,
+    },
+    data() {
+        return {
+            tasks: [{
+                    time: 2,
+                    responsable: "Alice",
+                    todo: "promener le chien"
+                }
+            ]
+        }
+    },
+    methods: {
+      // Add Task
+      SubmitTask(time1, responsable1, todo1) {
+        this.tasks.push({
+          time: time1,
+          responsable: responsable1,
+          todo: todo1
+        })        
+      }
     }
-  },
-  methods: {
-    increment() {
-      // update component state
-      this.count++
-    }
-  }
 }
 </script>
 
@@ -19,28 +32,20 @@ export default {
     <h1>Voici la todo list </h1>
   </div>
   <div class="add">
-    <div class="time">
       <label for="tentacles">Durée de la tâche (0-10 heures) : </label>
-      <input type="number" id="tentacles" name="tentacles" min="0" max="10">
-    </div>
-    <div class="responsable">
+      <input type="number" id="tentacles" name="tentacles" min="0" max="10" v-model="tentaclesValue">
       <label for="responsable-select">Choix du responsable : </label>
-      <select name="respopnsable" id="responsable-select">
+      <select name="respopnsable" id="responsable-select" v-model="responsableValue">
         <option value="">--Responsable--</option>
         <option value="alice">Alice</option>
         <option value="bob">Bob</option>
         <option value="oscar">Oscar</option>
       </select>
-    </div>
-    <div class="todo">
       <label for="name">Nom de la tâche (4 à 12 caractères): </label>
-      <input type="text" id="name" name="name" required minlength="4" maxlength="12" size="10">
-    </div>
-    <div class="button">
-      <button class="add-button" type="button">
+      <input type="text" id="name" name="name" required minlength="4" maxlength="12" size="10" placeholder="Tâche..."  v-model="nameValue">
+      <button class="add-button" @click="SubmitTask(tentaclesValue,responsableValue,nameValue)">
         Ajouter la tâche
       </button>
-    </div>
   </div>
   <div class = "table">
     <table border>
@@ -55,10 +60,10 @@ export default {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Tâche dynamique</td>
-          <td>Responsable dynamique</td>
-          <td>Durée dynamique</td>
+        <tr v-for="(task,index) in tasks" :key="index">
+                <td>{{task.time}}</td>
+                <td>{{task.responsable}}</td>
+                <td>{{task.todo}}</td>
           <td>boutton Faite !</td>
           <td>boutton Modifier</td>
           <td>boutton Supprimer</td>
@@ -66,15 +71,6 @@ export default {
       </tbody>
     </table>
   </div>
-  
-  <div>
-    <button @click="increment">ce boutton a ete appyé {{ count }} fois</button>
-  </div>
 </template>
 
-<style>
-span {
-  color:red;
-}
-</style>
 
