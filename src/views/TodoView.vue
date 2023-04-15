@@ -11,7 +11,7 @@ export default {
         }
     },
     methods: {
-      // Add Task
+      // add Task
       SubmitTask(time, responsable, todo) {
         if(time.length===0 || responsable.length===0 || todo.length===0){
           return;
@@ -34,15 +34,23 @@ export default {
         })        
       },
       // delete task
-      deleteTask(index) {
+      DeleteTask(index) {
             this.tasks.splice(index, 1)
       },
       // edit task
-      EditTask(index) {
-        this.task = this.tasks[index].time,
-        this.task = this.tasks[index].responsable,
-        this.task = this.tasks[index].todo,
-        this.editTask = index
+      EditTask(index, time, responsable, todo) {
+        if(time.length===0 && responsable.length===0 && todo.length===0){
+          return;
+        }
+        if(time.length!=0){
+          this.tasks[index].time=time;
+        }
+        if(responsable.length!=0){
+          this.tasks[index].responsable=responsable;
+        }
+        if(todo.length!=0){
+          this.tasks[index].todo=todo;
+        }
       }
     }
 }
@@ -87,10 +95,10 @@ export default {
                 <td>{{task.todo}}</td>
           <td>boutton Fait !</td>
           <td>
-            <button class="edit" @click="EditTask(index)">Modifier</button>
+            <button class="edit" @click="EditTask(index, timeValue,responsableValue,nameValue)">Modifier</button>
           </td>
           <td>
-            <button class="delete" @click="deleteTask(index)">Supprimer</button>
+            <button class="delete" @click="DeleteTask(index)">Supprimer</button>
           </td>
         </tr>
       </tbody>
