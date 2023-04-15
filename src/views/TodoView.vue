@@ -1,9 +1,5 @@
 <script>
 export default {
-    name: "TodoApp",
-    props: {
-        msg: String,
-    },
     data() {
         return {
             tasks: [{
@@ -20,20 +16,15 @@ export default {
         if(time.length===0 || responsable.length===0 || todo.length===0){
           return;
         }
-        let a=0;
-        let a_time=0;
-        let b=0;
-        let b_time=0;
-        let o=0;
-        let o_time=0;
-        for(i in this.tasks){
-          if(i.responsable==='Alice'){a++;a_time=i.time}
-          if(i.responsable==='Bob'){b++;b_time=i.time}
-          if(i.responsable==='Oscar'){o++;o_time=i.time}
+        let nb_task=0;
+        for(let i = 0; i < this.tasks.length; i++){
+          if(this.tasks[i].responsable==responsable){
+            nb_task=nb_task+1;
+          }
         }
-        if(responsable==='Alice' && (a>=3 ||a_time>=10)){return;}
-        if(responsable==='Bob' && (b>=3 ||b_time>=10)){return;}
-        if(responsable==='Oscar' && (o>=3 ||o_time>=10)){return;}
+        if(nb_task>2){
+          return;
+        }
         this.tasks.push({
           time: time,
           responsable: responsable,
@@ -65,9 +56,9 @@ export default {
       <label for="responsable-select">Choix du responsable : </label>
       <select name="respopnsable" id="responsable-select" v-model="responsableValue">
         <option value="">--Responsable--</option>
-        <option value="alice">Alice</option>
-        <option value="bob">Bob</option>
-        <option value="oscar">Oscar</option>
+        <option value="Alice">Alice</option>
+        <option value="Bob">Bob</option>
+        <option value="Oscar">Oscar</option>
       </select>
       <label for="name">Nom de la tâche (4 à 12 caractères): </label>
       <input type="text" id="name" name="name" required minlength="4" maxlength="12" size="10" placeholder="Tâche..."  v-model="nameValue">
