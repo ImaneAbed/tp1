@@ -72,9 +72,9 @@ export default {
     <table border>
       <thead>
         <tr>
-          <th>Tâche</th>
-          <th>Responsable</th>
           <th>Durée</th>
+          <th>Responsable</th>
+          <th>Tâche</th>
           <th>Faite !</th>
           <th>Modifier</th>
           <th>Supprimer</th>
