@@ -17,12 +17,14 @@ export default {
           return;
         }
         let nb_task=0;
+        let total_time=0
         for(let i = 0; i < this.tasks.length; i++){
           if(this.tasks[i].responsable==responsable){
             nb_task=nb_task+1;
+            total_time=total_time+this.tasks[i].time;
           }
         }
-        if(nb_task>2){
+        if(nb_task>2 || total_time+time>10){
           return;
         }
         this.tasks.push({
