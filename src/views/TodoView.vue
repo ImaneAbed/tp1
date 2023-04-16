@@ -2,6 +2,7 @@
 export default {
     data() {
         return {
+            isOk: false,
             tasks: [{
                     time: 2,
                     responsable: "Alice",
@@ -22,7 +23,8 @@ export default {
     methods: {
       // add task
       SubmitTask(time, responsable, todo) {
-        if(time.length===0 || responsable.length===0 || todo.length===0){
+        if(time.length==0 || responsable.length==0 || todo.length==0){
+          this.isOk = true;
           return;
         }
         let nb_task=0;
@@ -34,6 +36,7 @@ export default {
           }
         }
         if(nb_task>2 || total_time+time>10){
+          this.isOk = true;
           return;
         }
         this.tasks.push({
@@ -41,7 +44,8 @@ export default {
           responsable: responsable,
           todo: todo,
           done: false
-        })        
+        })   
+        this.isOk = false;     
       },
       // delete task
       DeleteTask(index) {
@@ -73,6 +77,7 @@ export default {
 <template>
   <div class="title">
     <h1>Voici la todo list </h1>
+    <h1 v-show="isOk">Tâche incorrecte</h1>
   </div>
   <div class="add">
       <label for="time">Durée de la tâche (0-10 heures) : </label>
