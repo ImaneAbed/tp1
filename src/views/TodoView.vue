@@ -1,17 +1,26 @@
-<script>
+<script >
 export default {
     data() {
         return {
             tasks: [{
                     time: 2,
                     responsable: "Alice",
-                    todo: "promener le chien"
+                    todo: "promener le chien",
+                    done: false
                 }
             ]
         }
     },
+    computed: {
+      TotalTasks() {
+        return this.tasks.length; 
+      },
+      TotalTasksDone() {
+        return this.tasks.filter(task => task.done).length;  
+      }
+    },
     methods: {
-      // add Task
+      // add task
       SubmitTask(time, responsable, todo) {
         if(time.length===0 || responsable.length===0 || todo.length===0){
           return;
@@ -30,7 +39,8 @@ export default {
         this.tasks.push({
           time: time,
           responsable: responsable,
-          todo: todo
+          todo: todo,
+          done: false
         })        
       },
       // delete task
@@ -51,6 +61,10 @@ export default {
         if(todo.length!=0){
           this.tasks[index].todo=todo;
         }
+      },
+      // validate task
+      DoneTask(index){
+        this.tasks[index].done=true;
       }
     }
 }
@@ -83,26 +97,47 @@ export default {
           <th>Durée</th>
           <th>Responsable</th>
           <th>Tâche</th>
-          <th>Faite !</th>
+          <th>Valider !</th>
           <th>Modifier</th>
           <th>Supprimer</th>
+          <th>Status de la tâche</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(task,index) in tasks" :key="index">
-                <td>{{task.time}}</td>
-                <td>{{task.responsable}}</td>
-                <td>{{task.todo}}</td>
-          <td>boutton Fait !</td>
+          <td>{{task.time}}</td>
+          <td>{{task.responsable}}</td>
+          <td>{{task.todo}}</td>   
+          <td>
+            <button class="done" @click="DoneTask(index)">Valider</button>
+          </td>
           <td>
             <button class="edit" @click="EditTask(index, timeValue,responsableValue,nameValue)">Modifier</button>
           </td>
           <td>
             <button class="delete" @click="DeleteTask(index)">Supprimer</button>
           </td>
+          <div>
+            <div v-if=task.done>
+              <td>Tâche faite :D</td>
+            </div>
+            <div v-else>
+              <td>Tâche à faire :/</td>
+          </div>
+          </div>
         </tr>
       </tbody>
     </table>
+  </div>
+  <div>
+    <div>
+      <span>Nombre total de tâches : </span>
+      <span>{{TotalTasks}}</span>
+    </div>
+    <div>
+      <span>Nombre de tâches faites : </span>
+      <span>{{TotalTasksDone}}</span>
+    </div>
   </div>
 </template>
 
