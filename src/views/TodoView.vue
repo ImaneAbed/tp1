@@ -1,4 +1,4 @@
-<script >
+<script> 
 export default {
     data() {
         return {
@@ -7,7 +7,8 @@ export default {
                     time: 2,
                     responsable: "Alice",
                     todo: "promener le chien",
-                    done: false
+                    done: false, 
+                    selected: false
                 }
             ]
         }
@@ -18,17 +19,23 @@ export default {
       },
       TotalTasksDone() {
         return this.tasks.filter(task => task.done).length;  
+      },
+      TotalTasksSelected(){
+        return this.tasks.filter(task => task.selected).length;
       }
     },
     methods: {
       // add task
       SubmitTask(time, responsable, todo) {
+        if(typeof time != 'number'){
+          return;
+        }
         if(time.length==0 || responsable.length==0 || todo.length==0){
           this.isOk = true;
           return;
         }
         let nb_task=0;
-        let total_time=0
+        let total_time=0;
         for(let i = 0; i < this.tasks.length; i++){
           if(this.tasks[i].responsable==responsable){
             nb_task=nb_task+1;
@@ -43,16 +50,28 @@ export default {
           time: time,
           responsable: responsable,
           todo: todo,
-          done: false
+          done: false,
+          selected: false
         })   
         this.isOk = false;     
       },
       // delete task
       DeleteTask(index) {
-            this.tasks.splice(index, 1)
+            this.tasks.splice(index, 1);
+      },
+      // delete selected tasks
+      DeleteTasks(){
+        for(let i = 0; i < this.tasks.length; i++){
+          if(this.tasks[i].selected){
+            DeleteTask(i);
+          }
+        }
       },
       // edit task
       EditTask(index, time, responsable, todo) {
+        if(typeof time != 'number'){
+          return;
+        }
         if(time.length===0 && responsable.length===0 && todo.length===0){
           return;
         }
@@ -69,6 +88,15 @@ export default {
       // validate task
       DoneTask(index){
         this.tasks[index].done=true;
+      },
+      // selecte task
+      SelecteTask(index){
+        if(this.tasks[index].selected){
+          this.tasks[index].selected=false;
+        }
+        else{
+          this.tasks[index].selected=true;
+        }
       }
     }
 }
@@ -76,7 +104,7 @@ export default {
 
 <template>
   <div class="title">
-    <h1>Voici la todo list </h1>
+    <h1>Liste de tâches à faire </h1>
     <h1 v-show="isOk">Tâche incorrecte</h1>
   </div>
   <div class="add">
@@ -105,6 +133,7 @@ export default {
           <th>Valider !</th>
           <th>Modifier</th>
           <th>Supprimer</th>
+          <th>Sélectionner</th>
           <th>Status de la tâche</th>
         </tr>
       </thead>
@@ -121,6 +150,9 @@ export default {
           </td>
           <td>
             <button class="delete" @click="DeleteTask(index)">Supprimer</button>
+          </td>
+          <td>
+            <input type="checkbox" id="selected" @click="SelecteTask(index)">
           </td>
           <div>
             <div v-if=task.done>
@@ -142,6 +174,13 @@ export default {
     <div>
       <span>Nombre de tâches faites : </span>
       <span>{{TotalTasksDone}}</span>
+    </div>
+    <div>
+      <span>Nombre de tâches sélectionnées : </span>
+      <span>{{TotalTasksSelected}}</span>
+    </div>
+    <div>
+      <button class="deleteSelected" @click="DeleteTasks()">Supprimer les tâches sélectionnées</button>
     </div>
   </div>
 </template>
