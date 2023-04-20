@@ -63,7 +63,7 @@ export default {
       DeleteTasks(){
         for(let i = 0; i < this.tasks.length; i++){
           if(this.tasks[i].selected){
-            DeleteTask(i);
+            this.tasks.splice(i, 1);
           }
         }
       },
